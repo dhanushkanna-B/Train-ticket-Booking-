@@ -124,7 +124,7 @@
       return;
     }
 
-    fetch("http://127.0.0.1:8000/cities")
+    fetch("https://train-ticket-booking-1-sicg.onrender.com/cities")
       .then((res) => {
         if (!res.ok) throw new Error("Failed to fetch cities");
         return res.json();
@@ -193,7 +193,7 @@
         password: passwordInput.value,
       };
 
-      fetch("http://127.0.0.1:8000/login", {
+      fetch("https://train-ticket-booking-1-sicg.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -304,7 +304,7 @@
           successEl.style.color = "var(--error)";
           return;
         }
-        fetch("http://127.0.0.1:8000/create_ac", {
+        fetch("https://train-ticket-booking-1-sicg.onrender.com/create_ac", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -362,7 +362,7 @@
       }
 
       fetch(
-        `http://127.0.0.1:8000/trains?from_city=${fromVal}&to_city=${toVal}`,
+        `https://train-ticket-booking-1-sicg.onrender.com/trains?from_city=${fromVal}&to_city=${toVal}`,
       )
         .then((res) => {
           if (!res.ok) throw new Error("Failed to fetch trains");
@@ -612,7 +612,7 @@
        };
 
        // Send to backend
-       fetch("http://127.0.0.1:8000/bookings", {
+       fetch("https://train-ticket-booking-1-sicg.onrender.com/bookings", {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(bookingPayload),
@@ -826,7 +826,10 @@
         return;
       }
 
-      window.open(`http://127.0.0.1:8000/invoice/${bookingId}`, "_blank");
+      window.open(
+        `https://train-ticket-booking-1-sicg.onrender.com/invoice/${bookingId}`,
+        "_blank",
+      );
     });
   }
 
