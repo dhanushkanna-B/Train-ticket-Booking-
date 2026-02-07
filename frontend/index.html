@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Train Ticket Booking</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Hamburger: shown only after login; click or overlay to close -->
+    <button
+      type="button"
+      class="hamburger hidden"
+      id="hamburger-btn"
+      aria-label="Open menu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+    <aside class="sidebar-panel" id="sidebar-panel">
+  <nav class="sidebar-nav">
+    <button type="button" class="sidebar-item" id="menu-about">About</button>
+    <button type="button" class="sidebar-item" id="menu-help">Help</button>
+    <button type="button" class="sidebar-item" id="menu-logout">Logout</button>
+
+    <!-- NEW: Last booking / history as a button -->
+    <button type="button" class="sidebar-item" id="menu-history">
+      Last Booking
+    </button>
+  </nav>
+</aside>
+     
+     
+
+    <!-- About modal -->
+  <!-- Last Booking History modal -->
+<div
+  class="modal"
+  id="modal-history"
+  role="dialog"
+  aria-labelledby="history-title"
+  aria-modal="true"
+  hidden
+>
+  <div class="modal-content">
+    <h2 id="history-title">Last Booking</h2>
+    <div id="history-details">
+      <!-- JS will fill booking details here -->
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary modal-close"
+      id="close-history"
+    >
+      Close
+    </button>
+  </div>
+</div>
+
+
+
+    <div
+      class="modal"
+      id="modal-about"
+      role="dialog"
+      aria-labelledby="about-title"
+      aria-modal="true"
+      hidden
+    >
+      <div class="modal-content">
+        <h2 id="about-title">About</h2>
+        <p>
+          Train Ticket Booking is a demo project for easy train reservation.
+          Book trains from Chennai, Mumbai, Delhi, Bangalore and more. Built for
+          college viva.
+        </p>
+        <button
+          type="button"
+          class="btn btn-primary modal-close"
+          id="close-about"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <!-- Help modal -->
+    <div
+      class="modal"
+      id="modal-help"
+      role="dialog"
+      aria-labelledby="help-title"
+      aria-modal="true"
+      hidden
+    >
+      <div class="modal-content">
+        <h2 id="help-title">Help</h2>
+        <p>
+          <strong>How to book:</strong> Login or create an account, then choose
+          From and To cities and search. Select a train, choose seats, and
+          complete payment.
+        </p>
+        <p>
+          <strong>Contact:</strong> Demo project — no real payments. For
+          support, reach your college.
+        </p>
+        <button
+          type="button"
+          class="btn btn-primary modal-close"
+          id="close-help"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+    <div class="app">
+      <!-- 0. Home page: header (Create account, Login, About us) + big scrollable content -->
+      <section id="section-splash" class="page active">
+        <header class="splash-header">
+          <a href="#" class="splash-logo" id="splash-logo">Train Ticket Booking</a>
+          <nav class="splash-header-nav">
+            <button type="button" class="splash-nav-link" id="splash-about">About us</button>
+            <button type="button" class="splash-nav-link" id="splash-create">Create account</button>
+            <button type="button" class="splash-nav-link splash-nav-login" id="splash-login">Login</button>
+          </nav>
+        </header>
+        <div class="splash-body">
+          <div class="splash-hero">
+            <div class="splash-hero-text">
+              <h1>Book Your Train Journey</h1>
+              <p class="splash-tagline">Travel across Chennai, Mumbai, Delhi, Bangalore and more. Secure reservation, A/C & Non A/C, pay online.</p>
+              <p class="splash-desc">Choose your route, pick your seats, and confirm with a few clicks. Your ticket, your way.</p>
+            </div>
+            <div class="splash-hero-img-wrap">
+              <img src="https://media.istockphoto.com/id/1911158435/photo/3d-illustration-of-buy-train-ticket-online-book-a-train-ticket-online-concept-3d-illustration.jpg?s=612x612&w=0&k=20&c=JrY2bj2NyC3CAbt6Ugy_1RkT4odI9CPLIcAhFml8Xsk=" alt="Train" class="splash-hero-img" />
+            </div>
+          </div>
+          <div class="splash-section">
+            <h2>Why Book With Us</h2>
+            <div class="splash-features">
+              <div class="splash-feature">
+                <span class="feature-icon">🎫</span>
+                <h3>Easy Booking</h3>
+                <p>Search trains, select A/C or Non A/C, and book in minutes.</p>
+              </div>
+              <div class="splash-feature">
+                <span class="feature-icon">🔒</span>
+                <h3>Secure Payment</h3>
+                <p>Safe UPI and net banking. Demo project for college viva.</p>
+              </div>
+              <div class="splash-feature">
+                <span class="feature-icon">📍</span>
+                <h3>Major Cities</h3>
+                <p>Chennai, Mumbai, Delhi, Bangalore, Coimbatore and more.</p>
+              </div>
+            </div>
+          </div>
+          <div class="splash-section splash-gallery">
+            <h2>Travel by Train</h2>
+            <div class="splash-gallery-imgs">
+              <img src="https://media.istockphoto.com/id/1130526452/photo/sunrise-and-train-journey.jpg?s=612x612&w=0&k=20&c=vFRpfL3aSgcI2JzvyAMpL9HzULWWC-v6dWIc_6L7fiM=" alt="Train" />
+              <img src="https://media.istockphoto.com/id/825275198/photo/passenger-train-in-india.jpg?s=612x612&w=0&k=20&c=RPLUdVPvstoM8xFRhyOgs7yDUtlvJ2io4FOQ5vuCEdM=" alt="Railway" />
+              <img src="https://media.istockphoto.com/id/1129078125/photo/the-girl-travels-by-train-to-beautiful-places-beautiful-girl-traveling-by-train-among.jpg?s=612x612&w=0&k=20&c=HCHXlPWt7QQ1rfwGrVZ3_AV37U8YVmQ_7HXYja-dOEY=" alt="Journey" />
+            </div>
+          </div>
+          <footer class="splash-footer">
+            <h3>Contact us</h3>
+            <p>Train Ticket Booking — Demo project. Book with ease.</p>
+            <div class="splash-contact">
+              <p><strong>Email:</strong> support@trainticketbooking.com</p>
+              <p><strong>Phone:</strong> +91 98765 43210</p>
+              <p><strong>Address:</strong> 123 Railway Road, Chennai Central, Tamil Nadu 600003</p>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <!-- 1. Auth: Login or Create account (after clicking Login/Create on splash) -->
+      <section id="section-landing" class="page">
+        <div class="auth-page-wrap">
+          <div class="hero small">
+            <h1>Train Ticket Booking</h1>
+            <p>Sign in or create an account</p>
+          </div>
+          <div class="card auth-card">
+          <div class="tabs">
+            <button type="button" class="tab active" data-tab="login">
+              Login
+            </button>
+            <button type="button" class="tab" data-tab="create">
+              Create account
+            </button>
+          </div>
+          <!-- Login: user must enter email and password -->
+          <div id="auth-login" class="auth-form active">
+            <form id="form-login">
+              <label for="login-email">Email</label>
+              <input
+                type="email"
+                id="login-email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+              <label for="login-password">Password</label>
+              <input
+                type="password"
+                id="login-password"
+                name="password"
+                placeholder="Enter your password"
+                required
+              />
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p id="login-error" class="error-msg" aria-live="polite"></p>
+          </div>
+          <div id="auth-create" class="auth-form">
+            <p class="hint">New user? Create an account to book tickets.</p>
+            <button type="button" class="btn btn-primary" id="go-to-register">
+              Create account
+            </button>
+          </div>
+        </div>
+        <button type="button" class="link-back" id="landing-back-to-splash">Back to home</button>
+        </div>
+      </section>
+
+      <!-- 2. Register -->
+      <section id="section-register" class="page">
+        <div class="auth-page-wrap">
+        <div class="card form-card">
+          <h2>Create account</h2>
+          <form id="form-register">
+            <label for="reg-name">Name</label>
+            <input
+              type="text"
+              id="reg-name"
+              name="name"
+              placeholder="Full name"
+              required
+            />
+            <label for="reg-phone">Phone number</label>
+            <input
+              type="tel"
+              id="reg-phone"
+              name="phone"
+              placeholder="10-digit mobile"
+              required
+            />
+            <label for="reg-email">Email</label>
+            <input
+              type="email"
+              id="reg-email"
+              name="email"
+              placeholder="Email address"
+              required
+            />
+            <label for="reg-password">Password</label>
+            <input
+              type="password"
+              id="reg-password"
+              name="password"
+              placeholder="Choose a password"
+              required
+            />
+            <button type="submit" class="btn btn-primary">
+              Create account
+            </button>
+          </form>
+          <p id="register-success" class="success-msg" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- 3. Booking (first page after login – no back button here) -->
+      <section id="section-booking" class="page">
+        <header class="app-header">
+          <span class="app-logo">Train Ticket Booking</span>
+        </header>
+        <main class="main-content">
+        <div class="booking-search-wrap">
+          <div class="booking-bg-pattern" aria-hidden="true"></div>
+          <div class="booking-bg-train" aria-hidden="true"></div>
+          <div class="booking-hero">
+            <div
+              class="booking-hero-bg"
+              style="
+                background-image: url(https://media.istockphoto.com/id/1182269566/photo/train-metal-snake-into-scurve.jpg?s=612x612&w=0&k=20&c=JeyzOQFtEYW7Ph3UqMIDxoK_cRyHYciXOMFvARToU1c=);
+              "
+            ></div>
+            <div class="booking-hero-content">
+              <h2>Book your journey</h2>
+              <p>From Chennai Central &amp; major stations</p>
+            </div>
+          </div>
+          <div class="booking-popular">
+            <h3>Popular from Chennai</h3>
+            <div class="popular-routes">
+              <button
+                type="button"
+                class="route-chip"
+                data-from="Chennai"
+                data-to="Bangalore"
+              >
+                Chennai → Bangalore
+              </button>
+              <button
+                type="button"
+                class="route-chip"
+                data-from="Chennai"
+                data-to="Mumbai"
+              >
+                Chennai → Mumbai
+              </button>
+              <button
+                type="button"
+                class="route-chip"
+                data-from="Chennai"
+                data-to="Coimbatore"
+              >
+                Chennai → Coimbatore
+              </button>
+            </div>
+          </div>
+          <div class="booking-strip">
+            <img
+              src="https://media.istockphoto.com/id/1047691020/photo/trains.jpg?s=612x612&w=0&k=20&c=iicSggvE0sAePypKvnJfe4lIHE_-6xIciNUnxWgxpRQ="
+              alt=""
+            />
+            <img
+              src="https://media.istockphoto.com/id/1409049940/photo/mother-and-daughter-waiting-at-a-train-station-platform.jpg?s=612x612&w=0&k=20&c=V3dxLa77FEj1yVxMkwXCrPgN-BIRxRSq0qM_HizuuFs="
+              alt=""
+            />
+            <img
+              src="https://media.istockphoto.com/id/1266917585/photo/mumbai-india-due-to-overcrowding-people-travel-in-open-doors-mumbai-suburban-railway-known-as.jpg?s=612x612&w=0&k=20&c=3s_2MuNbx4lQye_KeHktHYRSAbvVEvDZ4xKRHmoi7aY="
+              alt=""
+            />
+          </div>
+          <div class="card form-card booking-card">
+            <h2>Search trains</h2>
+            <form id="form-booking">
+              <div class="row">
+                <div class="field">
+                  <label for="from">From</label>
+                  <select id="from" name="from" required>
+                    <option value="">Select city</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="to">To</label>
+                  <select id="to" name="to" required>
+                    <option value="">Select city</option>
+                  </select>
+                </div>
+              </div>
+              <div class="field">
+                <label for="date">Date (optional)</label>
+                <input type="date" id="date" name="date" />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Search trains
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Train list -->
+      <section id="section-train-list" class="page">
+        <header class="app-header">
+          <span class="app-logo">Train Ticket Booking</span>
+        </header>
+        <main class="main-content">
+        <div class="card train-list-card">
+          <h2>Available trains</h2>
+          <p id="search-route" class="route-info"></p>
+          <div id="train-list" class="train-list"></div>
+        </div>
+        </main>
+      </section>
+
+      <!-- 5. Seat selection -->
+      <section id="section-seats" class="page">
+        <div class="card form-card">
+          <h2>Select seats</h2>
+          <div id="selected-train-summary" class="train-summary"></div>
+          <p id="selected-ticket-type" class="ticket-type-badge"></p>
+          <form id="form-seats">
+            <label for="num-seats">Number of seats</label>
+            <input
+              type="number"
+              id="num-seats"
+              name="numSeats"
+              min="1"
+              value="1"
+              required
+            />
+            <p id="total-price" class="price-display"></p>
+            <button type="submit" class="btn btn-primary">
+              Proceed to payment
+            </button>
+          </form>
+        </div>
+        </main>
+      </section>
+
+      <!-- 6. Payment -->
+      <section id="section-payment" class="page">
+        <div class="card form-card">
+          <h2>Payment</h2>
+          <p id="payment-amount" class="amount-display"></p>
+          <form id="form-payment">
+            <div class="payment-method">
+              <label
+                ><input type="radio" name="method" value="upi" checked />
+                UPI</label
+              >
+              <label
+                ><input type="radio" name="method" value="netbanking" /> Net
+                banking</label
+              >
+            </div>
+            <div id="upi-fields" class="method-fields">
+              <label for="upi-id">UPI ID</label>
+              <input
+                type="text"
+                id="upi-id"
+                name="upiId"
+                placeholder="e.g. name@paytm"
+              />
+            </div>
+            <div id="netbanking-fields" class="method-fields hidden">
+              <label for="bank">Select bank</label>
+              <select id="bank" name="bank">
+                <option value="">Choose bank</option>
+                <option value="sbi">State Bank of India</option>
+                <option value="hdfc">HDFC Bank</option>
+                <option value="icici">ICICI Bank</option>
+                <option value="axis">Axis Bank</option>
+              </select>
+            </div>
+            <label for="pay-amount">Amount (₹)</label>
+            <input
+              type="number"
+              id="pay-amount"
+              name="amount"
+              min="1"
+              step="1"
+              readonly
+            />
+            <button type="submit" class="btn btn-primary" id="pay-btn">
+              Pay
+            </button>
+          </form>
+          <div id="payment-processing" class="payment-processing hidden">
+            <div class="payment-spinner"></div>
+            <p>Processing your payment...</p>
+            <p class="payment-processing-hint">
+              Please wait, do not close this page.
+            </p>
+          </div>
+          <p id="payment-error" class="error-msg" aria-live="polite"></p>
+        </div>
+        </main>
+      </section>
+
+      <!-- 7. Success -->
+      <section id="section-success" class="page">
+        <div class="card success-card">
+          <div class="success-icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 52 52"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="26"
+                cy="26"
+                r="25"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+              />
+              <path
+                d="M14 26l9 9 15-18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+          <h2>Payment successful</h2>
+          <p>Your booking is confirmed. Have a safe journey!</p>
+          <button type="button" class="btn btn-primary" id="book-again">
+            Book again
+          </button>
+          <button type="button" class="btn btn-primary" id="download-invoice">
+            Download Invoice
+          </button>
+
+        </div>
+        </main>
+      </section>
+    </div>
+
+    <!-- Global back button: right bottom, every page except login -->
+    <button
+      type="button"
+      class="global-back"
+      id="global-back"
+      aria-label="Go back"
+      title="Back"
+    > where should i check 
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      Back
+    </button>
+
+    
+    <script src="app.js"></script>
+  </body>
+</html>
