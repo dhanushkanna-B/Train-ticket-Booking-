@@ -1,4 +1,5 @@
-from passlib.context import CryptContext
+from passlib.context import CryptContext 
+import hashlib
 from datetime import datetime, timedelta
 from jose import jwt, JWTError
 
@@ -13,13 +14,16 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 
-def hash_password(password: str):
-    return pwd_context.hash(password)
+def hash_password(password: str) -> str:
+    # Step 1: SHA-256 hash (fixed length)
+    sha256_pw = hashlib.sha256(password.encode("utf-8")).hexdigest()
+    # Step 2: bcrypt the hash
+    return pwd_context.hash(sha256_pw)
 
 
-def verify_password(plain_password: str, hashed_password: str):
-    return pwd_context.verify(plain_password, hashed_password)
-
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    sha256_pw = hashlib.sha256(plain_password.encode("utf-8")).hexdigest()
+    return pwd_context.verify(sha256_pw, hashed_password)
 
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
